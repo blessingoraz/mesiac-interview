@@ -1,0 +1,8 @@
+
+dist
+logs
+npm-debug.log
+node_modules
+https
+.DS_Store
+.env
