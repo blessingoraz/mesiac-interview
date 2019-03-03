@@ -10,6 +10,15 @@
   },
   "author": "",
   "license": "ISC",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "prop-types": "^15.6.2",
