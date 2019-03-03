@@ -5,6 +5,7 @@ import { Jumbotron, Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ModalComponent from './ModalAddEdit';
+import AlertDismissable from './AlertDismissable';
 
 import { data } from '../../mockData';
 import defaultImg from '../../images/default.png';
@@ -16,16 +17,19 @@ class App extends Component {
       modalShow: false
     };
   }
+
   handleAddStudent = () => {
     this.setState(prevState => ({
       addStudent: !prevState.addStudent
     }));
   }
+
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     return (
       <div>
         <Jumbotron>
+          <AlertDismissable/>
           <Button onClick={() => this.setState({ modalShow: true })}>Add Student </Button>
           <ModalComponent
             show={this.state.modalShow}
