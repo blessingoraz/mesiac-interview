@@ -38,14 +38,6 @@ export class BaseComponent extends Component {
     });
   }
 
-  handleCancelAlert = (errorCode) => {
-    console.log('errorCode ===', errorCode);
-    // if (errorCode === 401) {
-    //   return store.dispatch(pageActions.redirectToRoot())
-    // }
-    this.clearAlerts();
-  }
-
   loadingSpinner = () => {
     return (
       <Spinner

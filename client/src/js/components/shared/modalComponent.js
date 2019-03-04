@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import AddEditForm from './AddEditForm';
+import AddEditForm from '../AddEditForm';
 
 export default function ModalComponent(props) {
   return (
@@ -17,17 +17,18 @@ export default function ModalComponent(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add New Student
+          {props.description}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-
+      
+      {props.type !== 'delete' && <Modal.Body>
         <AddEditForm/>
-        
-      </Modal.Body>
-      {/* <Modal.Footer>
-        <Button onClick={props.onHide}>Add</Button>
-      </Modal.Footer> */}
+      </Modal.Body>}
+
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Cancel</Button>
+        <Button onClick={() => props.action()}>{props.type}</Button>
+      </Modal.Footer> 
     </Modal>
   );
 }

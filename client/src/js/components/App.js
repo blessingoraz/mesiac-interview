@@ -22,17 +22,14 @@ class App extends BaseComponent {
   }
 
   handleAddStudent = () => {
-      console.log('here');
       this.closeModal();
   }
 
   handleUpdateStudent = () => {
-    console.log('here')
     this.closeModal();
   }
 
   handleDelete = () => {
-    console.log('here')
     this.closeModal();
   }
 
