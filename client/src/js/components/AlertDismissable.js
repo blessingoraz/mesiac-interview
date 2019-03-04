@@ -15,7 +15,6 @@ class AlertDismissable extends Component {
 
     return (
       <Alert dismissible variant={color || 'success'}>
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
         <p>{message}</p>
       </Alert>
     );
@@ -28,9 +27,7 @@ AlertDismissable.defaultProps = {
 
 AlertDismissable.propTypes = {
   message: PropTypes.string.isRequired,
-  handleCancelAlert: PropTypes.func.isRequired,
-  callback: PropTypes.func,
-  // color: PropTypes.string.isRequired
+  color: PropTypes.string
 };
 
 export default AlertDismissable;

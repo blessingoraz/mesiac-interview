@@ -6,7 +6,7 @@ import { BaseComponent } from './shared/baseComponent';
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import ModalComponent from './ModalAddEdit';
+import ModalComponent from './shared/modalComponent';
 
 import { data } from '../../mockData';
 import defaultImg from '../../images/default.png';
@@ -15,28 +15,86 @@ class App extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
+      modalType: '',
       modalShow: false,
       showAlert: true
     };
   }
 
   handleAddStudent = () => {
-    this.setState(prevState => ({
-      addStudent: !prevState.addStudent
-    }));
+      console.log('here');
+      this.closeModal();
+  }
+
+  handleUpdateStudent = () => {
+    console.log('here')
+    this.closeModal();
+  }
+
+  handleDelete = () => {
+    console.log('here')
+    this.closeModal();
+  }
+
+  toggleModal = (modalType) => {
+    this.setState({
+      modalType,
+      modalShow: true
+    });
+  }
+
+  closeModal = () => {
+    this.setState({ modalShow: false, toggleModal: '' });
   }
 
   render() {
-    let modalClose = () => this.setState({ modalShow: false });
+
+    let customProps = {};
+    let Modal = ModalComponent;
+    
+    switch(this.state.modalType) {
+      case 'add':
+        customProps = {
+          action: this.handleAddStudent,
+          type: this.state.modalType,
+          show: this.state.modalShow,
+          onHide: this.closeModal,
+          description: 'Add New Student'
+        };
+        break;
+
+      case 'edit':
+        customProps = {
+          action: this.handleUpdateStudent,
+          type: this.state.modalType,
+          show: this.state.modalShow,
+          onHide: this.closeModal,
+          description: 'Update Student'
+        };
+        break;
+
+      case 'delete':
+        customProps = {
+          action: this.handleDelete,
+          type: this.state.modalType,
+          show: this.state.modalShow,
+          onHide: this.closeModal,
+          description: 'Are you sure you want to delete this student?'
+        };
+        break;
+      default:
+        Modal = null;
+    }
+
     return (
       <div>
         {this.state.showAlert && this.displayAlert('Message here')}
+        
         <Jumbotron>
-          <Button onClick={() => this.setState({ modalShow: true })}>Add Student </Button>
-          <ModalComponent
-            show={this.state.modalShow}
-            onHide={modalClose}
-          />
+          <Button onClick={() => this.toggleModal('add')}>Add Student </Button>
+          
+          {this.state.modalType !== '' && <Modal {...customProps} />}
+
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -60,8 +118,8 @@ class App extends BaseComponent {
                     <td>{data.birthDate}</td>
                     <td>{data.hobbies}</td>
                     <td><img src={defaultImg}/></td>
-                    <td><Button onClick={() => this.setState({ modalShow: true })}>Edit</Button></td>
-                    <td><Button variant="danger">Delete</Button></td>
+                    <td><Button onClick={() => this.toggleModal('edit')}>Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => this.toggleModal('delete')}>Delete</Button></td>
                   </tr>
                 );
               })

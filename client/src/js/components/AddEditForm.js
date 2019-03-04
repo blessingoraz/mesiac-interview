@@ -21,9 +21,6 @@ export default function AddEditForm() {
         <Form.Control type="file" placeholder="Enter first name" />
             
       </Form.Group>
-      <Button variant="primary" type="submit">
-            Submit
-      </Button>
     </Form>
   );
 }
