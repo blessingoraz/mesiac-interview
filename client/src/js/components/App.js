@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Jumbotron, Table, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { BaseComponent } from './shared/baseComponent';
 
 // Import bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ModalComponent from './ModalAddEdit';
-import AlertDismissable from './AlertDismissable';
 
 import { data } from '../../mockData';
 import defaultImg from '../../images/default.png';
 
-class App extends Component {
+class App extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false
+      modalShow: false,
+      showAlert: true
     };
   }
 
@@ -28,8 +30,8 @@ class App extends Component {
     let modalClose = () => this.setState({ modalShow: false });
     return (
       <div>
+        {this.state.showAlert && this.displayAlert('Message here')}
         <Jumbotron>
-          <AlertDismissable/>
           <Button onClick={() => this.setState({ modalShow: true })}>Add Student </Button>
           <ModalComponent
             show={this.state.modalShow}
