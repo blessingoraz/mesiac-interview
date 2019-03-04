@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 const config = require('../config');
 const app = express();
 
+const graphqlHTTP = require('express-graphql')
+const Schema = require('../schema');
+
 // Instatiate the server module object
 let server = {};
 
@@ -33,6 +36,12 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     next();
 });
+
+app.use('/graphql', graphqlHTTP({
+    schema: Schema,
+    pretty: true,
+    graphiql: true
+})) // middleware for graphql to interact with rest endpoint
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Mesiac coding challenge API' })

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel-node db.js",
+    "babel": "babel-node index.js",
     "start": "nodemon index.js"
   },
   "author": "Blessing Orazulume",
@@ -15,6 +15,9 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphiql": "^0.13.0",
+    "graphql": "^14.1.1",
     "lodash": "^4.17.11",
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.10",

@@ -30,7 +30,7 @@ const Conn = new Sequelize('students', 'root', 'root', {
         type: Sequelize.STRING
     },
     photo: {
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
     }
   });
 
