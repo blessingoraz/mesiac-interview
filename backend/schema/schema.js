@@ -1,55 +1,26 @@
 import {
     GraphQLObjectType,
     GraphQLInt,
+    GraphQLID,
     GraphQLString,
     GraphQLList,
     GraphQLSchema,
     GraphQLNonNull
 } from 'graphql';
 
-import Db from './db';
+import Db from '../db';
 
 const StudentType = new GraphQLObjectType({
     name: 'Student',
     description: 'This represents a Student',
     fields: () => {
         return {
-            id: {
-                type: GraphQLInt,
-                resolve(student) {
-                    return student.id
-                }
-            },
-            firstName: {
-                type: GraphQLString,
-                resolve(student) {
-                    return student.firstName
-                }
-            },
-            lastName: {
-                type: GraphQLString,
-                resolve(student) {
-                    return student.lastName
-                }
-            },
-            birthDate: {
-                type: GraphQLString,
-                resolve(student) {
-                    return student.birthDate
-                }
-            },
-            hobbies: {
-                type: GraphQLString,
-                resolve(student) {
-                    return student.hobbies
-                }
-            },
-            photo: {
-                type: GraphQLString,
-                resolve(student) {
-                    return student.photo
-                }
-            },
+            id: { type: GraphQLID },
+            firstName: {  type: GraphQLString },
+            lastName: { type: GraphQLString },
+            birthDate: { type: GraphQLString },
+            hobbies: { type: GraphQLString },
+            photo: { type: GraphQLString },
         }
     }
 });
@@ -57,16 +28,31 @@ const StudentType = new GraphQLObjectType({
 const Query = new GraphQLObjectType({
     name: 'Query',
     description: 'This is a root query',
-    fields: () => {
-        return {
-            students: {
-                type: new GraphQLList(StudentType),
-                resolve(root, args) {
-                    return Db.models.student.find({});
+    fields: () => ({
+        students: {
+            type: new GraphQLList(StudentType),
+            args: {
+                id: {
+                    type: GraphQLID
+                },
+                firstName: {
+                    type: GraphQLString
+                },
+                lastName: {
+                    type: GraphQLString
                 }
+            },
+            resolve(root, args) {
+                return Db.models.student.findAll({where: args});
+            }
+        },
+        students: {
+            type: new GraphQLList(StudentType),
+            resolve(root, args) {
+                return Db.models.student.find({});
             }
         }
-    }
+    })
 });
 
 // const Mutation = new GraphQLObjectType({
@@ -99,8 +85,7 @@ const Query = new GraphQLObjectType({
 //     }
 // });
 
-const Schema = new GraphQLSchema({
+module.exports = new GraphQLSchema({
     query: Query
 });
 
-export default Schema;

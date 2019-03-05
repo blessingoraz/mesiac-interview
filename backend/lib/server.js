@@ -11,7 +11,7 @@ const config = require('../config');
 const app = express();
 
 const graphqlHTTP = require('express-graphql')
-const Schema = require('../schema');
+const Schema = require('../schema/schema');
 
 // Instatiate the server module object
 let server = {};
