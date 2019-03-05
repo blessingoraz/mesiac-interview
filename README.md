@@ -1,4 +1,6 @@
 # Student Client 
+
+![alt text](https://i.imgur.com/NekaZtL.png)
 ## Install Dependencies
 
 ```
@@ -36,5 +38,5 @@ npm install
 ## Run the project
 
 ```
-npm start
+npm run babel
 ```
