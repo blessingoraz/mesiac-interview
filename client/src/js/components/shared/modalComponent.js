@@ -1,9 +1,5 @@
 import React from 'react';
-
 import { Modal, Button } from 'react-bootstrap';
-
-// Import bootstrap css
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AddEditForm from '../AddEditForm';
 
@@ -26,7 +22,7 @@ export default function ModalComponent(props) {
       </Modal.Body>}
 
       <Modal.Footer>
-        <Button onClick={props.onHide}>Cancel</Button>
+        <Button onClick={props.onHide}>cancel</Button>
         <Button onClick={() => props.action()}>{props.type}</Button>
       </Modal.Footer> 
     </Modal>
